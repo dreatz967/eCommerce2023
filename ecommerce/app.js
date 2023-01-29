@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 dotenv.config()
 //import routes
-const userRoutes = require('./routes/user.js')
+const authRoutes = require('./routes/auth.js')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
@@ -16,7 +16,7 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(expressValidator())
 //routes middleware
-app.use('/api', userRoutes)
+app.use('/api', authRoutes)
 
 
 

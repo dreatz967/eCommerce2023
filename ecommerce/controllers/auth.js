@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken'); // to generate signed token
-const expressJwt = require('express-jwt'); // for authorization check
+const { expressjwt: expressJwt} = require('express-jwt'); // for authorization check
 const { errorHandler } = require('../helpers/dbErrorHandler');
 
 // using promise
@@ -67,7 +67,7 @@ exports.signin = (req, res) => {
         return res.json({ token, user: { _id, email, name, role } });
     });
 };
-/*
+
 exports.signout = (req, res) => {
     res.clearCookie('t');
     res.json({ message: 'Signout success' });
@@ -75,8 +75,9 @@ exports.signout = (req, res) => {
 
 exports.requireSignin = expressJwt({
     secret: process.env.JWT_SECRET,
-    userProperty: 'auth'
-});
+    algorithms: ["HS256"], // added later
+    userProperty: "auth",
+  });
 
 exports.isAuth = (req, res, next) => {
     let user = req.profile && req.auth && req.profile._id == req.auth._id;
