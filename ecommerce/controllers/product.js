@@ -106,8 +106,8 @@ exports.update = (req, res) => {
                     error: 'Image should be less than 1mb in size'
                 });
             }
-            product.photo.data = fs.readFileSync(files.photo.path);
-            product.photo.contentType = files.photo.type;
+            product.photo.data = fs.readFileSync(files.photo.filepath);
+            product.photo.contentType = files.photo.mimetype;
         }
 
         product.save((err, result) => {
